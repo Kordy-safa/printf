@@ -7,24 +7,23 @@
  */
 int _printf(const char *format, ...)
 {
-	int value = 0;
+	int value = 0, i = 0;
 	va_list saf;
 
 	va_start(saf, format);
 
-	for (; *format != '\0'; format++)
+	for (;format[i] != '\0'; i++)
 	{
-		if (*format != '%')
+		if (format[i] != '%')
 		{
-			format++;
-			if (*format == 'c')
+			if (format[i + 1] == 'c')
 			{
 			int z = (va_arg(saf, int));
 
 			_putchr(z);
-			value++;
+			i++;
 			}
-			else if (*format == 's')
+			else if (format[i + 1] == 's')
 			{
 				char *s = (va_arg(saf, char *));
 
@@ -32,10 +31,10 @@ int _printf(const char *format, ...)
 				{
 					_putchr(*s++);
 					s++;
-					value++;
+					i++;
 				}
 			}
-			else if ((*format == 'd') || (*format == 'i'))
+			else if ((format[i + 1] == 'd') || (format[i + 1] == 'i'))
 			{
 				int q = va_arg(saf, int);
 
@@ -43,16 +42,17 @@ int _printf(const char *format, ...)
 				value += _put_int(q);
 			}
 		}
-		else if (*format == '%')
+		else if (format[i + 1] == '%')
 		{
 			_putchr('%');
-			value++;
+			i++;
 		}
 		else
 		{
-			_putchr(*format);
-			value++;
+			_putchr(format[i + 1]);
+			i++;
 		}
+		value =+ 1;
 	}
 	va_end(saf);
 
