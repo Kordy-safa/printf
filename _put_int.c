@@ -1,16 +1,28 @@
 #include "main.h"
 
-int _put_int(int j)
+/**
+ * _put_int - function to %d & %i
+ * @q: integer parameter
+ * Return: int
+ */
+int _put_int(int q)
 {
-               int n, s_val = 0;
+	int val = 0;
 
-                 if (j == 0)
-			 return (0);
-                                else
-                                                        n = j/10;
-                                       s_val += 1;
-                                                _put_int(n);
-                                                      _putchr (j%10 + 48);
-                                                                   
-							      return (s_val);
+	if (q == 0)
+	{
+		return (1);
+	}
+	else if (q < 0)
+	{
+		val++;
+		q = -q;
+	}
+	for (; q > 0; )
+	{
+		val++;
+		q /= 10;
+	}
+
+	return (val);
 }
