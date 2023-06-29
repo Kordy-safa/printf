@@ -7,54 +7,30 @@
  */
 int _printf(const char *format, ...)
 {
-	int value = 0, i = 0;
+	int char_value = 0;
 	va_list saf;
+	Arraycon isa[] = {
+		{"c", char_cons},
+		{"s", string_cons},
+		{"%", puts_percent},
+		{"d", Integer_base10},
+		{"i", Integer_base8},
+		{"b", unsigned_binary},
+		{"u", unsigned_int},
+		{"o", puts_octal},
+		{"x", hex_lowercase},
+		{"X", hex_Uppercase},
+		{"r", reverse_string},
+		{"R", rot13},
+		{NULL, NULL}
+		};
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(saf, format);
-
-	for (;format[i] != '\0'; i++)
-	{
-		if (format[i] != '%')
-		{
-			if (format[i + 1] == 'c')
-			{
-			int z = (va_arg(saf, int));
-
-			_putchr(z);
-			i++;
-			}
-			else if (format[i + 1] == 's')
-			{
-				char *s = (va_arg(saf, char *));
-
-				while (*s != '\0')
-				{
-					_putchr(*s++);
-					s++;
-					i++;
-				}
-			}
-			else if ((format[i + 1] == 'd') || (format[i + 1] == 'i'))
-			{
-				int q = va_arg(saf, int);
-
-				_putchr(q);
-				value += _put_int(q);
-			}
-		}
-		else if (format[i + 1] == '%')
-		{
-			_putchr('%');
-			i++;
-		}
-		else
-		{
-			_putchr(format[i + 1]);
-			i++;
-		}
-		value =+ 1;
-	}
+	char_value = _function_imp(format, isa, saf); 
 	va_end(saf);
 
-	return (value);
+	return (char_value);
 }
