@@ -7,39 +7,99 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int q = 0, s_value = 0;
+        int q = 0;
 	va_list saf;
+       	va_start(saf, format);
 
-	for (; format[q] != '\0'; q++)
+	for (; *format != '\0';)
 	{
-		if (format[q] != '%')
+		if (*format == '%')
 		{
-			_putchr(format[q]);
-		}
-		else if (format[q + 1] == 'c')
+			format++;
+		switch (*format)
 		{
-			_putchr(va_arg(saf, int));
-			q++;
+			case 'c':
+			{
+                    int c = va_arg(saf, int);
+                    putchar(c);
+                    q++;
+                    break;
+                }
+			case 's':
+			{
+                    const char *s = va_arg(saf, const char *);
+                    while (*s != '\0')
+                    {
+                        putchar(*s);
+                        s++;
+                        q++;
+                    }
+                    break;
+                }
+			case '%':
+                {
+                    _putchr('%');
+                    q++;
+                    break;
+                }
+		case 'd':
+                case 'i':
+                {
+                    int w = va_arg(saf, int);
+                    printf("%d", w);
+                    q++;
+                    break;
+                }
+		case 'u':
+                {
+                        unsigned int w  = va_arg(saf, unsigned int);
+                        printf("%u", w);
+                        q++;
+                        break;
+                }
+                case 'o':
+                {
+                        unsigned int w = va_arg(saf, unsigned int);
+                        printf("%o", w);
+                        q++;
+                        break;
+                }
+		case 'x':
+                {
+                        unsigned int w  = va_arg(saf, unsigned int);
+                        printf("%x", w);
+                        q++;
+                        break;
 		}
-		else if (format[q + 1] == 's')
-		{
-			int s_val = _put_str(va_arg(saf, char *));
-			q++;
-			s_value += s_val;
+                case 'X':
+                {
+                        unsigned int w = va_arg(saf, unsigned int);
+			printf("%X", w);
+		        q++;
+			break;
 		}
-		else if (format[q + 1] == '%')
-		{
-			_putchr('%');
-			q++;
+		case 'r':
+                {
+                         void *isa = va_arg(saf, void *);
+			 uintptr_t isa_value = (uintptr_t)isa;
+			 printf("%p", (void *)isa_value);
+			 q++;
+			 break;
+                }
+		default:
+		break;
+                }
 		}
-		else if ((format[q + 1] == 'd') || (format[q + 1] == 'i'))
-		{
-			s_value += _put_int(va_arg(saf, int));
-			q++;
-		}
-		s_value += 1;
-	}
+		else
+        {
+            _putchr(*format);
+	    q++;
+        }
 
-	return (0);
+        format++;
+    }
+
+    va_end(saf);
+
+return (0);
 }
-
