@@ -9,19 +9,19 @@ int _printf(const char *format, ...)
 {
 	int char_value = 0;
 	va_list saf;
-	Arraycon isa[] = {
-		{"c", char_cons},
-		{"s", string_cons},
-		{"%", puts_percent},
-		{"d", Integer_base10},
-		{"i", Integer_base8},
-		{"b", unsigned_binary},
-		{"u", unsigned_int},
-		{"o", puts_octal},
-		{"x", hex_lowercase},
-		{"X", hex_Uppercase},
-		{"r", reverse_string},
-		{"R", rot13},
+	convert_t isa[] = {
+		{"c", _char_cons},
+		{"s", _string_cons},
+		{"%", _puts_percent},
+		{"d", _put_num},
+		{"i", _put_num},
+		{"b", _binary_int},
+		{"u", _unsigned_num_par},
+		{"o", _octal_int},
+		{"x", _hex_base},
+		{"X", _heX_base},
+		{"r", _reverse_str},
+		{"R", _rot13},
 		{NULL, NULL}
 		};
 
@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(saf, format);
-	char_value = _function_imp(format, isa, saf); 
+	char_value = _function_imp(format, isa, saf);
 	va_end(saf);
 
 	return (char_value);

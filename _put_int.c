@@ -5,10 +5,10 @@
  * @x: unsigned integer parameter
  * Return: int (count of nos printed)
  */
-int _put_int(unsigned int q)
+int _put_unsigned_int(unsigned int q)
 {
-	int lng = 0, int val = 1;
-	unsigned int x
+	int lng = 0, val = 1;
+	unsigned int x;
 
 	x = q;
 	while (x / val > 9)
@@ -31,11 +31,11 @@ int _put_int(unsigned int q)
  */
 int _put_int(va_list saf)
 {
-	int q, lng = 0, int val = 1;
-	unsigned int x
+	int q, lng = 0, val = 1;
+	unsigned int x;
 
 	q = va_arg(saf, int);
-	if (n <= 0)
+	if (q <= 0)
 		x = q;
 	else
 	{

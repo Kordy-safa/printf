@@ -11,19 +11,19 @@ int _function_imp(const char *format, convert_t isa[], va_list saf)
 {
 	int f = 0, g = 0, fix, char_value;
 
-	value = 0;
+	char_value = 0;
 	for (; format[f] != '\0'; f++)
 	{
-		if (format[f] = '%')
+		if (format[f] == '%')
 		{
 			for (; isa[g].xy != NULL; g++)
 			{
 				if (format[f + 1] == isa[g].xy[0])
 				{
-					fix = value[f].isa(saf);
+					fix = isa[f].l(saf);
 					if (fix == -1)
 						return -1;
-					value += fix;
+					char_value += fix;
 					break;
 				}
 			}
@@ -42,7 +42,7 @@ int _function_imp(const char *format, convert_t isa[], va_list saf)
 		}
 		else
 		{
-			_putchr(format[i]);
+			_putchr(format[f]);
 			char_value++;
 		}
 	}
