@@ -1,8 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include<stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -18,6 +20,9 @@ typedef struct {
        int (*l)(va_list);
 } convert_t;
 
+=======
+#include<stdint.h>
+>>>>>>> 2b4ff603db66229847d4bf63bc257423409b8f65
 int _printf(const char *format, ...);
 int _putchr(char z);
 int _put_unsigned_int(unsigned int q);
