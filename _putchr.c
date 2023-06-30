@@ -1,20 +1,27 @@
 #include "main.h"
 
 /**
-<<<<<<< HEAD
- * _putchr - prints characters
- * @z: char input par
- * Return: int
-=======
  * _putchr - writes a character to the standard output
  * @z: character to be written
  * Return: On success, returns the number of characters written.
  * On error, returns -1.
->>>>>>> 2b4ff603db66229847d4bf63bc257423409b8f65
  */
 int _putchr(char z)
 {
-	return (write(1, &z, 1));
+	static char buf[1024];
+	static int x;
+
+	if (z == -1 || x >= 1024)
+	{
+		write(1, &buf, x);
+		x = 0;
+	}
+	if (x != -1)
+	{
+		buf[x] = z;
+		x++;
+	}
+	return (1);
 }
 
 /**

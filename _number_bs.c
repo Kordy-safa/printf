@@ -7,65 +7,69 @@ char *convert(unsigned long int y, int bs, int lw_cs);
  * @saf: List of all the arguments
  * Return: int
  */
-int _octal_int(va_list saf)
+int _octal_int(va_list saf, flags_t *l)
 {
 	unsigned int q = va_arg(saf, unsigned int);
 	char *s = convert(q, 8, 0);
 	int lng = 0;
 
 	q = va_arg(saf, unsigned int);
-	if (s[0] != '0')
+	if (l->kt == 1 && s[0] != '0')
 		lng += _putchr('0');
 	lng += _pts(s);
 
 	return (lng);
 }
+
 /**
- * _binary_int - Converts a number from base 10 to binary
+ * _bin_int - Converts a number from base 10 to binary
  * @saf: List of arguments passed
  * Return: int
  */
-int _binary_int(__attribute__((unused))va_list saf)
+int int_bin(va_list saf,__attribute__((unused))flags_t *l)
 {
 	unsigned int x = va_arg(saf, unsigned int);
 	char *s = convert(x, 2, 0);
 
 	return (_pts(s));
 }
+
 /**
  * _heX_base - Prints decimal numbers on base16 Uppercase
  * @saf: List of the arguments
  * Return: No of chars printed
  */
-int _heX_base(va_list saf)
+int _heX_base(va_list saf, flags_t *l) 
 {
 	unsigned int q = va_arg(saf, unsigned int);
 	char *s = convert(q, 16, 0);
 	int lng = 0;
 
-	if (s[0] != '0')
+	if (s[0] != 48 && l->kt == 1)
 		lng += _pts("0X");
 	lng += _pts(s);
 
 	return (lng);
 }
+
 /**
  * hex_base - Prints decimal nos on base16 lowercase
  * @saf: List of the arguments
  * Return: No of chars printed
  */
-int _hex_base(va_list saf)
+int _hex_base(flags_t *l, va_list saf)
 {
 	unsigned int q = va_arg(saf, unsigned int);
 	char *s =  convert(q, 16, 1);
 	int val = 0;
 
-	if (s[0] != '0')
+	if (s[0] != 48 && l->kt == 1)
 		val += _pts("0x");
 	val += _pts(s);
 
 	return (val);
 }
+
 /**
  * convert - converts integer and  their base into string
  * @y: input int parameter

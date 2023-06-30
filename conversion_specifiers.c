@@ -3,10 +3,12 @@
 /**
  * _char_cons - Prints character
  * @saf: list of arguments
+ * @l: pointer to the struct flags
  * Return: Will return the amount of characters printed.
  */
-int _char_cons(va_list saf)
+int _char_cons(va_list saf, flags_t *l)
 {
+	(void)l;
 	_putchr(va_arg(saf, int));
 	return (1);
 }
@@ -16,28 +18,26 @@ int _char_cons(va_list saf)
  * @saf: list of arguments
  * Return: Will return the amount of characters printed.
  */
-int _string_cons(va_list saf)
+int _string_cons(va_list saf,__attribute__((unused))flags_t *l)
 {
-	int x = 0;
-	char *s;
+	char *s = va_arg(saf, char *);
 
-	s = va_arg(saf, char *);
-	if (s == NULL)
+	if (!s)
 		s = "null";
-	for (; s[x] != '\0'; x++)
-		_putchr(s[x]);
 
-	return (x);
+	return (_putchr(s);
+
 }
 /**
  * _puts_percent - Prints a percent symbol
  * @saf: list of arguments
  * Return: no of characters printed.
  */
-int _puts_percent(__attribute__((unused))va_list saf)
+int _puts_percent(__attribute__((unused))va_list saf, flags_t *l)
 {
-	_putchr('%');
-	return (1);
+(void)l;
+_putchr('%');
+return (1);
 }
 
 /**
@@ -45,29 +45,31 @@ int _puts_percent(__attribute__((unused))va_list saf)
  * @saf: list of arguments
  * Return: no of characters printed.
  */
-int _put_num(va_list saf)
+int _put_num(va_list saf, flags_t *l)
 {
-	int no_lng;
+	int q = va_arg(l, int);
+	int fix = _int_cnt(q);
 
-	no_lng = _put_int(saf);
-	return (no_lng);
+	if (l->cf == 1 && l->ds == 0 && q >= 0)
+		fix += _putchr(' ');
+	if (l->ds == 1 && d >= 0)
+		fix += _putchr('+');
+	if (q <= 0)
+		fix++;
+	print_number(n);
+	return (fix);
 }
+
 /**
  * unsigned_int_par - Prints Unsigned integers
  * @saf: List of all of the argumets
  * Return: no of counts
  */
-int _unsigned_num_par(va_list saf)
+int _unsigned_num_par(va_list saf, flags_t *l)
 {
-	unsigned int y;
+	unsigned int x = va_arg(saf, int);
+	char *s = convert(x, 10, 0);
 
-	y = va_arg(saf, unsigned int);
-
-	if (y == 0)
-		return (_put_unsigned_int((y)));
-
-	if (y < 1)
-		return (-1);
-
-	return (_put_unsigned_int((y)));
+	(void)l;
+	return (_pts(s));
 }

@@ -5,11 +5,12 @@
  * @saf: list of arguments
  * Return: int
  */
-int _reverse_str(va_list saf)
+int _reverse_str(va_list saf, flags_t *l) 
 {
 	int x = 0, y;
 	char *p = va_arg(saf, char *);
 
+	void(l);
 	if (!p)
 		p = "null";
 
@@ -27,7 +28,7 @@ int _reverse_str(va_list saf)
  * @saf: list of arguments
  * Return: int
  */
-int _rot13(va_list saf)
+int _rot13(va_list saf,__attribute__((unused))flags_t *l)
 {
 	char *s;
 	int x = 0, y = 0;

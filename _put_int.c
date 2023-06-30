@@ -26,29 +26,45 @@ int _put_unsigned_int(unsigned int q)
 
 /**
  * _put_int - function to %d, %i when unsigned
- * @saf: list of arguments
- * Return: int (count of nos printed)
+ * @x: integer
+ * Return: numbers of char
  */
-int _put_int(va_list saf)
+int _put_int(int x)
 {
-	int q, lng = 0, val = 1;
-	unsigned int x;
+	unsigned int x1;
 
-	q = va_arg(saf, int);
-	if (q <= 0)
-		x = q;
+	if (x < 0)
+	{
+		_putchr('-');
+		x1 = -x;
+	}
 	else
-	{
-		lng += _putchr('-');
-		x = q * -1;
-	}
-	
-	while (val != 0)
-	{
-		lng += _putchr(48 + x / val);
-		x %= val;
-		val /= 10;
-	}
+		x1 = x;
 
-	return (lng);
+	if (x1 / 10)
+		_put_int(x1 / 10);
+	_putchr((48 + (x1 % 10));
+
+}
+
+/**
+ * _int_cnt - returns the no of digits in an int
+ * @d: integer to evaluate
+ * Return: number of digits
+ */
+int _int_count(int d)
+{
+	unsigned int x = 0;
+	unsigned int y;
+
+	if (d < 0)
+		y = d * -1;
+	else
+		y = x;
+	while (y != 0)
+	{
+		y /= 10;
+		x++;
+	}
+	return (x);
 }
