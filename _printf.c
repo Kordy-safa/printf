@@ -1,15 +1,15 @@
 #include "main.h"
 
 /**
- * _function_imp - prints a formated string
+ * function_imp - prints a formated string
  * @isa: array containing function names
  * @format: character string
  * @saf: varidic arguments list
  * Return: number of chars
  */
-int _printf(const char *format, ...)
+int printf(const char *format, ...)
 {
-	int (*fnc_py)(va_list, flags_t *)
+	int (*fnc_py)(va_list, flags_t *);
 	const char *s;
 	va_list saf;
 	flags_t flags = {0, 0, 0};
@@ -28,20 +28,20 @@ int _printf(const char *format, ...)
 			s++;
 			if (*s == '%')
 			{
-				char_value += _putchr('%');
+				char_value += putchr('%');
 				continue;
 			}
-			while (_flags_src(*s, &flags))
+			while (flag_src(*s, &flags))
 				s++;
 			fnc_py = function_imp(*s);
 			char_value += (fnc_py)
 			? fnc_py(saf, &flags)
-			: _printf("%%%c", *s);
+			: printf("%%%c", *s);
 		}
 		else
-			char_value += _putchr(*s);
+			char_value += putchr(s);
 	}
-	_putchr(-1);
+	putchr(-1);
 	va_end(saf);
 
 	return (char_value);

@@ -8,27 +8,27 @@
 int (*function_imp( char *str))(va_list, flags_t *)
 {
 	convert_t isa[] = {
-		{"c", _char_cons},
-		{"s", _string_cons},
-		{"%", _puts_percent},
-		{"d", _put_num},
-		{"i", _put_num},
+		{"c", char_cons},
+		{"s", string_cons},
+		{"%", puts_percent},
+		{"d", put_num},
+		{"i", put_num},
 		{"b", int_bin},
-		{"u", _unsigned_num_par},
-		{"o", _octal_int},
-		{"x", _hex_base},
-		{"X", _heX_base},
-		{"r", _reverse_str},
-		{"R", _rot13},
-		{"p", _prnt_addr},
-		{"S", _function_imp.c},
+		{"u", unsigned_num_par},
+		{"o", octal_int},
+		{"x", hx_base},
+		{"X", heX_base},
+		{"r", reverse_str},
+		{"R", rot13},
+		{"p", prnt_addr},
+		{"S", not_printablech},
 		};
 	int flags = 14;
 	
 	int d = 0;
 
 	for(; d < flags; d++)
-		if (isa[d].c == str)
+		if ((char *)isa[d].l == str)
 			return (isa[d].l);
 
 	return (NULL);

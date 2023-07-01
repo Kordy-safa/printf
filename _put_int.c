@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _put_int - function to %d, %i when unsigned
+ * put_int - function to %d, %i when unsigned
  * @x: unsigned integer parameter
  * Return: int (count of nos printed)
  */
-int _put_unsigned_int(unsigned int q)
+int put_unsigned_int(unsigned int q)
 {
 	int lng = 0, val = 1;
 	unsigned int x;
@@ -16,7 +16,7 @@ int _put_unsigned_int(unsigned int q)
 
 	while (val != 0)
 	{
-		lng += _putchr(48 + x / val);
+		lng += putchr(48 + x / val);
 		x %= val;
 		val /= 10;
 	}
@@ -25,34 +25,33 @@ int _put_unsigned_int(unsigned int q)
 }
 
 /**
- * _put_int - function to %d, %i when unsigned
+ * put_int - function to %d, %i when unsigned
  * @x: integer
  * Return: numbers of char
  */
-int _put_int(int x)
+int put_int(int x)
 {
 	unsigned int x1;
 
 	if (x < 0)
 	{
-		_putchr('-');
+		putchr('-');
 		x1 = -x;
 	}
 	else
 		x1 = x;
 
 	if (x1 / 10)
-		_put_int(x1 / 10);
-	_putchr((48 + (x1 % 10));
-
+		put_int(x1 / 10);
+	putchr((48 + (x1 % 10)));
 }
 
 /**
- * _int_cnt - returns the no of digits in an int
+ * int_count - returns the no of digits in an int
  * @d: integer to evaluate
  * Return: number of digits
  */
-int _int_count(int d)
+int int_count(int d)
 {
 	unsigned int x = 0;
 	unsigned int y;

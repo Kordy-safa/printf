@@ -8,7 +8,7 @@
  *
  * Return: 1 if a flag is initiated, 0 otherwise
  */
-int _flag_src(char y, flags_t *l)
+int flag_src(char y, flags_t *l)
 {
 	int x = 0;
 
